@@ -1,16 +1,12 @@
 package com.sinchan.hibernateproject.controller;
-import org.springframework.batch.core.JobParametersInvalidException;
-import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
-import org.springframework.batch.core.repository.JobRestartException;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sinchan.hibernateproject.batch.runner.JobRunner;
 import com.sinchan.hibernateproject.constants.StringConstants;
 import com.sinchan.hibernateproject.entity.CourseEntity;
 import com.sinchan.hibernateproject.requestDto.CourseIdReqDto;
@@ -20,8 +16,9 @@ import com.sinchan.hibernateproject.requestDto.WorkflowStartDto;
 import com.sinchan.hibernateproject.responseDto.WorkflowResponseDto;
 import com.sinchan.hibernateproject.service.CourseService;
 import com.sinchan.hibernateproject.service.WorkflowService;
+
 /***
- * @author sinchan 
+ * @author sinchan
  */
 @RestController
 public class Controller {
@@ -30,8 +27,6 @@ public class Controller {
 	CourseService courseService;
 	@Autowired
 	WorkflowService wfService;
-	@Autowired
-	private JobRunner jobRunner;
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index() {
@@ -60,6 +55,7 @@ public class Controller {
 		return ResponseEntity.ok(response);
 
 	}
+
 	/**
 	 * 
 	 * @param dto
@@ -71,21 +67,6 @@ public class Controller {
 		final String response = wfService.processEvent(dto);
 		return ResponseEntity.ok(response);
 
-	}
-	// batches
-	/***
-	 * 
-	 * @return
-	 * @throws JobRestartException
-	 * @throws JobInstanceAlreadyCompleteException
-	 * @throws JobParametersInvalidException
-	 */
-
-	@RequestMapping(value = "/job")
-	public String runJob()
-			throws JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException {
-		jobRunner.runBatchJob();
-		return String.format("Job Demo1 submitted successfully.");
 	}
 
 }
