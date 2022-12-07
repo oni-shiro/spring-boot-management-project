@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1k6bve7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.5.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+  <bpmn:collaboration id="Collaboration_068v0wh">
+    <bpmn:participant id="libraryManagement" name="Libary Management" processRef="library_management" />
+  </bpmn:collaboration>
+  <bpmn:process id="library_management" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_0zvfp59" />
+    <bpmn:startEvent id="Event_1m615uh">
+      <bpmn:outgoing>Flow_051etkz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_0vskyvh" name="User Book Request">
+      <bpmn:incoming>Flow_051etkz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0p41ssy</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1q53n7a" name="Cancel Book Request">
+      <bpmn:incoming>Flow_1vs5q8u</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lvmxnz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_083vmnd">
+      <bpmn:incoming>Flow_0lvmxnz</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="Gateway_11c427i" default="Flow_0ndiylf">
+      <bpmn:incoming>Flow_09wpsfc</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vs5q8u</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0ndiylf</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="Activity_1ttn9df" name="Allot book">
+      <bpmn:incoming>Flow_0ndiylf</bpmn:incoming>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_0fl283w" name="Check Availability" camunda:class="">
+      <bpmn:incoming>Flow_0p41ssy</bpmn:incoming>
+      <bpmn:outgoing>Flow_09wpsfc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_051etkz" sourceRef="Event_1m615uh" targetRef="Activity_0vskyvh" />
+    <bpmn:sequenceFlow id="Flow_0p41ssy" sourceRef="Activity_0vskyvh" targetRef="Activity_0fl283w">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${eventName=="SUBMIT_BOOK_REQ"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1vs5q8u" sourceRef="Gateway_11c427i" targetRef="Activity_1q53n7a">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isBookAvailable}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0lvmxnz" sourceRef="Activity_1q53n7a" targetRef="Event_083vmnd" />
+    <bpmn:sequenceFlow id="Flow_09wpsfc" sourceRef="Activity_0fl283w" targetRef="Gateway_11c427i" />
+    <bpmn:sequenceFlow id="Flow_0ndiylf" sourceRef="Gateway_11c427i" targetRef="Activity_1ttn9df" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_068v0wh">
+      <bpmndi:BPMNShape id="Participant_06i6w99_di" bpmnElement="libraryManagement" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="1120" height="700" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1m615uh_di" bpmnElement="Event_1m615uh">
+        <dc:Bounds x="222" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06wvqzd_di" bpmnElement="Activity_0vskyvh">
+        <dc:Bounds x="290" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09ygdu2_di" bpmnElement="Activity_1q53n7a">
+        <dc:Bounds x="370" y="400" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_083vmnd_di" bpmnElement="Event_083vmnd">
+        <dc:Bounds x="222" y="422" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1gmi2ev_di" bpmnElement="Gateway_11c427i" isMarkerVisible="true">
+        <dc:Bounds x="735" y="295" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0rp5bbi_di" bpmnElement="Activity_1ttn9df">
+        <dc:Bounds x="870" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0dxccid_di" bpmnElement="Activity_0fl283w">
+        <dc:Bounds x="540" y="280" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_051etkz_di" bpmnElement="Flow_051etkz">
+        <di:waypoint x="258" y="320" />
+        <di:waypoint x="290" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0p41ssy_di" bpmnElement="Flow_0p41ssy">
+        <di:waypoint x="390" y="320" />
+        <di:waypoint x="540" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vs5q8u_di" bpmnElement="Flow_1vs5q8u">
+        <di:waypoint x="760" y="345" />
+        <di:waypoint x="760" y="440" />
+        <di:waypoint x="470" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lvmxnz_di" bpmnElement="Flow_0lvmxnz">
+        <di:waypoint x="370" y="440" />
+        <di:waypoint x="258" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09wpsfc_di" bpmnElement="Flow_09wpsfc">
+        <di:waypoint x="640" y="320" />
+        <di:waypoint x="735" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ndiylf_di" bpmnElement="Flow_0ndiylf">
+        <di:waypoint x="785" y="320" />
+        <di:waypoint x="870" y="320" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
