@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.sinchan.hibernateproject.requestDto.ProcessEventDto;
 import com.sinchan.hibernateproject.requestDto.WorkflowStartDto;
 import com.sinchan.hibernateproject.responseDto.WorkflowResponseDto;
-import com.sinchan.hibernateproject.service.WorkflowService;
+import com.sinchan.hibernateproject.services.WorkflowService;
 
 public class WorkflowController {
     @Autowired

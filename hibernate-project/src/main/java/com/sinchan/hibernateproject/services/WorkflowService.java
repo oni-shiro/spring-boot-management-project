@@ -1,4 +1,4 @@
-package com.sinchan.hibernateproject.service;
+package com.sinchan.hibernateproject.services;
 
 import java.util.List;
 

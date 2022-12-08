@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sinchan.hibernateproject.constants.StringConstants;
 import com.sinchan.hibernateproject.entity.Book;
-import com.sinchan.hibernateproject.service.UpdateDetailsService;
+import com.sinchan.hibernateproject.services.UpdateDetailsService;
 
 /***
  * @author sinchan
