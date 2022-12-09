@@ -9,12 +9,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "books")
+
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "book_id")
 	private Integer bookId;
-	@Column(name = "book_name")
+	@Column(name = "book_name", unique = true)
 	private String bookName;
 	@Column(name = "book_author")
 	private String bookAuthor;

@@ -2,7 +2,7 @@ package com.sinchan.hibernateproject.payload;
 
 public class BookDto {
 
-	private Integer bootId;
+	private Integer bookId;
 	private String bookName;
 	private String bookAuthor;
 	private String bookPublication;
@@ -14,12 +14,12 @@ public class BookDto {
 		super();
 	}
 
-	public Integer getBootId() {
-		return bootId;
+	public Integer getBookId() {
+		return bookId;
 	}
 
-	public void setBootId(Integer bootId) {
-		this.bootId = bootId;
+	public void setBookId(Integer bookId) {
+		this.bookId = bookId;
 	}
 
 	public String getBookName() {
