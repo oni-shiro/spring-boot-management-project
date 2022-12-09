@@ -1,6 +1,5 @@
 package com.sinchan.hibernateproject.exceptions;
 
-@SuppressWarnings("serial")
 public class ResourceNotFoundException extends RuntimeException {
 
 	String resourceName;

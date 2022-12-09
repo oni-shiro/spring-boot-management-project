@@ -117,4 +117,8 @@ public class Book {
 				+ bookPublicationYear + "]";
 	}
 
+	public Book orElseThrow(Object object) {
+		return null;
+	}
+
 }

@@ -3,6 +3,8 @@ package com.sinchan.hibernateproject.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,11 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-//	@GetMapping("/{bookId}")
-//	public ResponseEntity<?> getBookById(@PathVariable Integer bookId) {
-//		BookDto foundBookDto = this.bookService.findBookById(bookId);
-//		return new ResponseEntity<BookDto>(foundBookDto, HttpStatus.OK);
-//	}
+	@GetMapping("/{bookId}")
+	public ResponseEntity<?> getBookById(@PathVariable Integer bookId) {
+		BookDto foundBookDto = this.bookService.findBookById(bookId);
+		return new ResponseEntity<BookDto>(foundBookDto, HttpStatus.OK);
+	}
 
 	@PostMapping("/")
 	public ResponseEntity<?> createBook(@RequestBody BookDto bookDto) {

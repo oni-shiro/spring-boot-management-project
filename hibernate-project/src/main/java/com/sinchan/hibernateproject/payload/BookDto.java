@@ -12,7 +12,6 @@ public class BookDto {
 
 	public BookDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Integer getBootId() {
