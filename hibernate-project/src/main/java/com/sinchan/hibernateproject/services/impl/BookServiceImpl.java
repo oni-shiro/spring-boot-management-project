@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.sinchan.hibernateproject.entity.Book;
+import com.sinchan.hibernateproject.exceptions.DataIntegrityViolationException;
 import com.sinchan.hibernateproject.exceptions.ResourceNotFoundException;
 import com.sinchan.hibernateproject.payload.BookDto;
 import com.sinchan.hibernateproject.repository.BookRepo;
@@ -67,14 +68,19 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public BookDto createBook(BookDto bookDto) {
-		Book savedBook = this.bookRepo.save(this.modelMapper.map(bookDto, Book.class));
+		Book savedBook = new Book();
+		try {
+			savedBook = this.bookRepo.save(this.modelMapper.map(bookDto, Book.class));
+		} catch (Exception e) {
+			throw new DataIntegrityViolationException("Book", "bookName", bookDto.getBookName());
+		}
 		return this.modelMapper.map(savedBook, BookDto.class);
 	}
 
 	@Override
 	public BookDto updateBookDetails(Integer bookId, BookDto bookDto) {
 		Book book = this.bookRepo.findByBookId(bookId)
-				.orElseThrow(() -> new ResourceNotFoundException("Book", "bookId", bookId));
+				.orElseThrow();
 		book.setBookName(bookDto.getBookName());
 		book.setBookCount(bookDto.getBookCount());
 		book.setBookAuthor(bookDto.getBookAuthor());

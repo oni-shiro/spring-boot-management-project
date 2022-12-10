@@ -10,11 +10,25 @@ import com.sinchan.hibernateproject.payload.ApiResponse;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Resource not found exception
+
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> resourceNotFoundExceptionHandler(ResourceNotFoundException e) {
+    public ResponseEntity<ApiResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException e) {
         String message = e.getMessage();
         ApiResponse apiResponse = new ApiResponse(message, "404 Not Found");
-        return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+    }
+
+    // Data Integrity Violation Exception
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+
+        String message = e.getMessage();
+        System.out.println(message);
+        ApiResponse apiResponse = new ApiResponse(message, "404 Not Found");
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+
     }
 
 }
