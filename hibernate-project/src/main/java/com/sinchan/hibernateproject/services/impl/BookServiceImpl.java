@@ -80,7 +80,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public BookDto updateBookDetails(Integer bookId, BookDto bookDto) {
 		Book book = this.bookRepo.findByBookId(bookId)
-				.orElseThrow();
+				.orElseThrow(() -> new ResourceNotFoundException("Book", "book id", bookId));
 		book.setBookName(bookDto.getBookName());
 		book.setBookCount(bookDto.getBookCount());
 		book.setBookAuthor(bookDto.getBookAuthor());
@@ -88,7 +88,12 @@ public class BookServiceImpl implements BookService {
 		book.setBookPublication(bookDto.getBookPublication());
 		book.setBookPublicationYear(bookDto.getBookPublicationYear());
 
-		Book savedBook = this.bookRepo.save(book);
+		Book savedBook = new Book();
+		try {
+			savedBook = this.bookRepo.save(book);
+		} catch (Exception e) {
+			throw new DataIntegrityViolationException("Book", "bookName", bookDto.getBookName());
+		}
 		return this.modelMapper.map(savedBook, BookDto.class);
 
 	}

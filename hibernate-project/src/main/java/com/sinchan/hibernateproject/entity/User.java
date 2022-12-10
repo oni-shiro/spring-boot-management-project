@@ -14,10 +14,20 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer userId;
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true, nullable = false)
 	private String userName;
-	@Column(name = "user_role")
+	@Column(name = "user_role", nullable = false)
 	private String userRole;
+	@Column(name = "user_password", nullable = false)
+	private String userPassword;
+
+	public String getUserPassword() {
+		return this.userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
 
 	public Integer getUserId() {
 		return userId;

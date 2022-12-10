@@ -9,7 +9,7 @@ public class DataIntegrityViolationException extends RuntimeException {
     }
 
     public DataIntegrityViolationException(String resourceName, String fieldName, Object fieldValue) {
-        super(String.format("%s not found with %s: %s ", resourceName, fieldName, fieldValue));
+        super(String.format("%s  %s is already into the %s-database", fieldValue, fieldName, resourceName));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;

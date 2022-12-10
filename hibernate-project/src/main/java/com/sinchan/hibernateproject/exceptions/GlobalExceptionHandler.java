@@ -26,8 +26,8 @@ public class GlobalExceptionHandler {
 
         String message = e.getMessage();
         System.out.println(message);
-        ApiResponse apiResponse = new ApiResponse(message, "404 Not Found");
-        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+        ApiResponse apiResponse = new ApiResponse(message, "400 Bad Request");
+        return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
 
     }
 
