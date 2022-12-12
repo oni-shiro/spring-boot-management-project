@@ -1,4 +1,4 @@
-package com.sinchan.hibernateproject.workflow;
+package com.sinchan.hibernateproject.workflow.listner;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.springframework.stereotype.Component;

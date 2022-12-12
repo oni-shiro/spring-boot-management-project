@@ -1,4 +1,4 @@
-package com.sinchan.hibernateproject.workflow;
+package com.sinchan.hibernateproject.workflow.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
