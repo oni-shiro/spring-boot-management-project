@@ -1,11 +1,13 @@
 package com.sinchan.hibernateproject.workflow.dto;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 
 
-public class NewBookReq {
+public class NewBookReq implements Serializable {
+    
     private List<String> orderDetails;
     private Integer holdingPeriod;
     @Override

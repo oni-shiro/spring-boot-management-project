@@ -32,6 +32,8 @@ public class WorkflowService {
                     .startProcessInstanceByKey(dto.getJourneyName(), dto.getVariableMap());
 
             runtimeService.setVariables(processInstance.getId(), dto.getVariableMap());
+            runtimeService.setVariable(processInstance.getId(), "userId", dto.getUserId());
+            runtimeService.setVariable(processInstance.getId(), "userPassword", dto.getUserPassword());
             processId = processInstance.getId();
             response.setProcessId(processId);
             response.setProcessName(dto.getJourneyName());
