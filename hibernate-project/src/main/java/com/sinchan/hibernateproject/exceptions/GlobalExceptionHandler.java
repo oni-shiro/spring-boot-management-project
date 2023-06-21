@@ -31,4 +31,11 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<ApiResponse> apiException(ApiException e) {
+        String message = e.getMessage();
+        ApiResponse apiResponse = new ApiResponse(message, "404 Not Found");
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+    }
+
 }
